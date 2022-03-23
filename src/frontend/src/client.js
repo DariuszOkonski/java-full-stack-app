@@ -5,16 +5,14 @@ const checkStatus = (response) => {
         return response;
     }
 
+    throw new Error("what...")
     // convert non-2xx HTTP responses into errors
-    const error = new Error(response.statusText);
-    error.response = response;
-    return Promise.reject(error);
+    // const error = new Error(response.statusText);
+    // error.response = response;
+    // return Promise.reject(error);
 }
 
 export const getAllStudents = () => {
-    fetch('http://localhost:8080/api/v1/students')
-        .then(checkStatus)
-        .catch(err => {
-            console.log(err);
-        })
+    fetch('api/v1/students')
+        .then(res => console.log(res))
 }
