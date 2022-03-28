@@ -1,10 +1,21 @@
+import { Button, Radio } from 'antd'
 import './App.css';
 
 function App() {
 
     return (
         <div className="App">
-            <h1>Hello world</h1>
+
+            <Button type='primary'>Hello</Button>
+
+            <br />
+
+            <Radio.Group value='large'>
+                <Radio.Button value='large'>Large</Radio.Button>
+                <Radio.Button value='default'>Default</Radio.Button>
+                <Radio.Button value='small'>Small</Radio.Button>
+            </Radio.Group>
+
         </div>
     );
 }
