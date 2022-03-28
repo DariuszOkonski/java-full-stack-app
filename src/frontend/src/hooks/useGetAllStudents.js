@@ -21,7 +21,6 @@ export const useGetAllStudents = (url) => {
                 setIsPending(false)
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
                 setIsPending(false);
             })
