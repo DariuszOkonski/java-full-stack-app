@@ -9,16 +9,24 @@ function App() {
     const { data, isPending, error } = useGetAllStudents("api/v1/students");
 
     useEffect(() => {
-        setStudents(data);
+        if(data) {
+            setStudents(data);
+        }
     },[data])
+
+    if(students.length <= 0) {
+        return "no data"
+    }
 
     return (
         <div className="App">
-            { error && <h1>{error}</h1>}
-            { isPending && <h1>Loading...</h1> }
-            { students && students.map(el => <h1 key={el.id}>{el.name}</h1>)}
+            {
+                students.map((student, index) => {
+                    return <p key={index}>{student.id} {student.name}</p>
+                })
+            }
         </div>
-    );
+    )
 }
 
 export default App;
