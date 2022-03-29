@@ -1,10 +1,11 @@
-import {  Layout, Menu, Breadcrumb, Table } from 'antd';
+import {  Layout, Menu, Breadcrumb, Table, Spin, Empty } from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
     FileOutlined,
     TeamOutlined,
     UserOutlined,
+    LoadingOutlined,
 } from '@ant-design/icons';
 
 import './App.css';
@@ -38,11 +39,13 @@ const columns = [
     },
 ];
 
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
 function App() {
 
     const [collapsed, setCollapsed] = useState(false);
-    const [students, setStudents] = useState([])
-    const { data } = useGetAllStudents("api/v1/students");
+    const [students, setStudents] = useState([]);
+    const { data, isPending } = useGetAllStudents("api/v1/students");
 
     useEffect(() => {
         if(data) {
@@ -51,10 +54,22 @@ function App() {
     },[data])
 
     const renderStudents = () => {
+        if(isPending) {
+            return  <Spin style={{ display: 'block', margin: '0 auto'}} indicator={antIcon} />;
+        }
+
         if(students.length <= 0) {
-            return  "no data available";
+            return  <Empty />;
         } else {
-            return <Table dataSource={students} columns={columns} />
+            return <Table
+                dataSource={students}
+                columns={columns}
+                bordered
+                title={() => 'Students'}
+                pagination={{ pageSize: 50 }}
+                scroll={{y: 240 }}
+                rowKey={(student) => student.id}
+            />
         }
     }
 
