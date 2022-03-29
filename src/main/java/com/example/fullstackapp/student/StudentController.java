@@ -25,6 +25,12 @@ public class StudentController {
                         "Alex",
                         "alex@amigoscode.edu",
                         Gender.MALE
+                ),
+                new Student(
+                        3L,
+                        "Michael",
+                        "michael@amigoscode.edu",
+                        Gender.MALE
                 )
         );
 
