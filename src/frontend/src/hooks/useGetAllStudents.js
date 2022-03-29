@@ -26,5 +26,5 @@ export const useGetAllStudents = (url) => {
             })
     },[])
 
-    return { data, isPending, error }
+    return { data }
 }
